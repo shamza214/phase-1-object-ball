@@ -173,13 +173,14 @@ function teamNames(){
 
 }
 
-// function playerNumbers(teamName){
-//     let game = gameObject()
-//     if (game.home.teamName === teamName) {
-//         return game.home.players.number
-//     } 
-// }
+function playerNumbers(teamName){
+    let game = gameObject()
+    if (game.home.teamName === teamName) {
+        return game.home.players.number
+    } 
+}
 
+// Method 1
 function playerNumbers(teamName) {
     let game = gameObject(); 
     let team = game.home.teamName === teamName ? game.home : game.away;
@@ -191,11 +192,45 @@ function playerNumbers(teamName) {
   
     return jerseyNumbers;
   }
+
+// Method 2
+  function playerNumbers(teamName) {
+    const game = gameObject(); 
   
+    if (game.home.teamName === teamName) {
+  
+      return Object.values(game.home.players).map(player => player.number);
+    }
+  
+    if (game.away.teamName === teamName) {
 
-//console.log(numPointsScored(`s`))
-//console.log(shoeSize(`Alan Anderson`))
-//console.log(teamColors("Charlotte Hornets"))
-//console.log(teamNames())
-console.log(playerNumbers(`Charlotte Hornets`))
+      return Object.values(game.away.players).map(player => player.number);
+    }
 
+    return [];
+}
+  
+function playerStats(playerName) {
+    const game = gameObject();
+  
+    for (let player in game.home.players) {
+      if (player === playerName) {
+        return game.home.players[player]; 
+      }
+    }
+
+    for (let player in game.away.players) {
+      if (player === playerName) {
+        return game.away.players[player];
+      }
+    }
+
+    return "Does not exist"; 
+  }
+  
+//console.log(numPointsScored(`s`));
+//console.log(shoeSize(`Alan Anderson`));
+//console.log(teamColors("Charlotte Hornets"));
+//console.log(teamNames());
+//console.log(playerNumbers(`Charlotte Hornets`));
+console.log(playerStats("Alan Anderson"));
