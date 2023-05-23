@@ -121,7 +121,6 @@ function gameObject() {
 //     let obj = gameObject();
 //     return obj.home.teamName;
 // }
-
 // console.log(homeTeamName());
 
 function numPointsScored(playerName){
@@ -174,16 +173,29 @@ function teamNames(){
 
 }
 
-function playerNumbers(teamName){
-    let game = gameObject()
-        if (game.home.teamName === teamName) {
-            return game.home.players.number
-        } 
-    }
+// function playerNumbers(teamName){
+//     let game = gameObject()
+//     if (game.home.teamName === teamName) {
+//         return game.home.players.number
+//     } 
+// }
 
+function playerNumbers(teamName) {
+    let game = gameObject(); 
+    let team = game.home.teamName === teamName ? game.home : game.away;
+    let jerseyNumbers = [];
+    
+    for (let player in team.players) {
+      jerseyNumbers.push(team.players[player].number); 
+    }
+  
+    return jerseyNumbers;
+  }
+  
 
 //console.log(numPointsScored(`s`))
 //console.log(shoeSize(`Alan Anderson`))
 //console.log(teamColors("Charlotte Hornets"))
 //console.log(teamNames())
-console.log(playerNumbers(`Brooklyn Nets`))
+console.log(playerNumbers(`Charlotte Hornets`))
+
